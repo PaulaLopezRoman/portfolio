@@ -1,0 +1,635 @@
+/* Añade aquí los estilos de tu versión. Se cargan después del CSS original. */
+
+[data-loader-brand] {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.loader-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: loader-letter-settle 520ms linear var(--letter-delay) forwards;
+}
+
+@keyframes loader-letter-settle {
+  from { opacity: 1; transform: translateY(var(--letter-offset)); }
+  42% { transform: translateY(calc(var(--letter-offset) * 1.084)); animation-timing-function: ease-out; }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-letter { animation: none; opacity: 1; }
+}
+
+.creative-introduction {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: white;
+  pointer-events: none;
+}
+
+.creative-introduction-copy {
+  width: min(100%, 640px);
+  color: #000;
+  font: 17px/1.4 Teodor, serif;
+  text-align: center;
+}
+
+.creative-introduction-copy p + p {
+  margin-top: 15px;
+}
+
+.creative-introduction-word {
+  display: inline-block;
+}
+
+.creative-introduction-letter {
+  visibility: hidden;
+}
+
+.creative-introduction-letter.is-written {
+  visibility: visible;
+}
+
+@font-face {
+  font-family: "Lay Grotesk Regular";
+  src: url("/portfolio/fonts/LayGrotesk-Trial-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+nav[data-navbar] > div {
+  width: 100%;
+  justify-content: space-between;
+  padding-inline: 12px;
+}
+
+nav[data-navbar] > div > span,
+a[aria-label="Paula López Román — home"] {
+  font-family: "Lay Grotesk Regular", LayGrotesk, sans-serif;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+button[aria-label="Turn on sound"],
+button[aria-label="Turn off sound"] {
+  top: 44px;
+  right: 12px;
+}
+
+[data-loader-brand] {
+  font-family: "Lay Grotesk Regular", LayGrotesk, sans-serif;
+  font-weight: 400;
+}
+
+.creative-entry-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font: 400 14px/1.4 "Lay Grotesk Regular", LayGrotesk, sans-serif;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.creative-entry-name.is-entering {
+  visibility: visible;
+}
+
+.creative-entry-name:not(.is-entering) .loader-letter {
+  animation: none;
+}
+
+.project-info-overlay {
+  display: none;
+}
+
+.creative-entry-name .loader-letter {
+  animation: none;
+  opacity: 1;
+}
+
+
+nav[data-navbar] a[aria-current="page"] {
+  background-color: rgba(208, 208, 208, .8) !important;
+}
+
+nav[data-project-index] {
+  visibility: visible !important;
+  transform: none !important;
+}
+
+nav[data-project-index] a {
+  gap: 4px;
+  align-items: center;
+  padding-inline: 8px !important;
+}
+
+nav[data-project-index] a > div:first-child {
+  display: none;
+}
+
+nav[data-project-index] a > div:nth-child(2) {
+  position: static;
+}
+
+@media (max-width: 375px) {
+  nav[data-project-index] > div {
+    gap: 4px;
+    padding-inline: 6px;
+  }
+
+  nav[data-project-index] a {
+    padding-inline: 5px !important;
+  }
+
+  nav[data-project-index] a > div:nth-child(2) {
+    font-size: 13px;
+  }
+}
+
+nav[data-navbar] a {
+  align-items: center;
+  gap: 4px;
+  padding-inline: 8px !important;
+}
+nav[data-navbar] a > div:first-child { display: none; }
+nav[data-navbar] a > div:nth-child(2) { position: static; }
+button[aria-label="Turn on sound"],
+button[aria-label="Turn off sound"],
+button[aria-label="Click to enable audio"] { display: none !important; }
+
+.portfolio-blank-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 12px;
+}
+.portfolio-blank-header a { color: #0a0a0a; text-decoration: none; }
+.portfolio-brand {
+  font: 400 14px/1.3 "Lay Grotesk Regular", sans-serif;
+  white-space: nowrap;
+}
+.portfolio-blank-header nav {
+  display: flex;
+  gap: 4px;
+  font: 400 15px/1.1 Teodor, Georgia, serif;
+}
+.portfolio-blank-header nav a {
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: #f4f4f4;
+  white-space: nowrap;
+}
+.portfolio-blank-header nav a[aria-current="page"] { background: #dadada; }
+.portfolio-blank-header sup { font: 11px sans-serif; }
+@media (max-width: 520px) {
+  nav[data-navbar] > div { padding-inline: 6px; gap: 4px; }
+  nav[data-navbar] a,
+  .portfolio-blank-header nav a { padding-inline: 4px !important; gap: 2px; }
+  nav[data-navbar] a > div:nth-child(2),
+  .portfolio-blank-header nav { font-size: 12px; }
+  .portfolio-blank-header { padding-inline: 6px; }
+  .portfolio-brand { font-size: 12px; }
+}
+
+.creative-entry-name { overflow: hidden; }
+.creative-entry-name-text {
+  display: block;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+nav[data-navbar] a > div:nth-child(2),
+.portfolio-blank-header nav a > span {
+  display: block;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width .24s ease, opacity .16s ease, margin-right .24s ease;
+}
+nav[data-navbar] a,
+.portfolio-blank-header nav a {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: 26px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+nav[data-navbar] a:is(:hover,:focus-visible) > div:nth-child(2),
+.portfolio-blank-header nav a:is(:hover,:focus-visible) > span {
+  max-width: 100px;
+  opacity: 1;
+  margin-right: 4px;
+}
+[data-case-white-fade] {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  background: white;
+  transition: opacity .34s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-case-white-fade],
+  nav[data-navbar] a > div:nth-child(2),
+  .portfolio-blank-header nav a > span { transition: none; }
+}
+
+nav[data-navbar] a,
+nav[data-navbar] a[aria-current="page"],
+.portfolio-blank-header nav a,
+.portfolio-blank-header nav a[aria-current="page"] {
+  background: transparent !important;
+  backdrop-filter: none;
+}
+
+nav[data-navbar] {
+  color: white;
+  mix-blend-mode: exclusion;
+}
+nav[data-navbar] a { color: inherit; }
+
+@font-face {
+  font-family: "Portfolio Teodor";
+  src: url("/portfolio/fonts/Teodor-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+.portfolio-about {
+  box-sizing: border-box;
+  width: min(100%, 490px);
+  padding: clamp(102px, 14vh, 138px) 24px 48px;
+  font: 400 clamp(17px, 2.1vw, 20px)/1.45 "Portfolio Teodor", Georgia, serif;
+}
+
+.portfolio-about p {
+  margin: 0 0 1em;
+}
+
+.portfolio-about {
+  margin-inline: auto;
+  text-align: center;
+  font-size: clamp(15px, 1.5vw, 17px);
+  text-wrap: pretty;
+}
+
+.portfolio-contact-page > .portfolio-blank-header {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+.portfolio-contact-page {
+  min-height: 100dvh;
+  margin: 0;
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
+  padding-block: 64px;
+}
+
+.portfolio-contact {
+  box-sizing: border-box;
+  width: min(100%, 820px);
+  margin-inline: auto;
+  padding: 0 26px;
+  font: 400 18px/1.45 "Portfolio Teodor", Georgia, serif;
+}
+
+.portfolio-contact h1 {
+  margin: 0 0 16px;
+  font-size: clamp(42px, 6vw, 70px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.portfolio-contact form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 34px;
+  margin-top: clamp(42px, 9vh, 76px);
+  font: 400 14px/1.4 "Lay Grotesk Regular", LayGrotesk, sans-serif;
+}
+
+.portfolio-contact label {
+  display: grid;
+  gap: 6px;
+}
+
+.portfolio-contact input,
+.portfolio-contact textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 2px 8px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid currentColor;
+  font: inherit;
+  color: inherit;
+}
+
+.portfolio-contact textarea { resize: none; }
+
+.portfolio-contact input:focus,
+.portfolio-contact textarea:focus {
+  outline: none;
+  border-bottom-width: 2px;
+  padding-bottom: 7px;
+}
+.portfolio-contact .contact-message { grid-column: 1 / -1; }
+
+.portfolio-contact button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 5px 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.portfolio-contact button:hover { text-decoration: underline; }
+
+@media (max-width: 540px) {
+  .portfolio-contact form { grid-template-columns: 1fr; }
+}
+
+.portfolio-about {
+  width: min(100%, 663px);
+}
+
+.portfolio-contact button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+}
+
+.portfolio-contact button:hover { text-decoration: none; }
+.contact-send-arrow { font-size: 25px; line-height: 1; }
+.contact-send-label { opacity: 0; transition: opacity .16s ease; }
+.portfolio-contact button:is(:hover,:focus-visible) .contact-send-label { opacity: 1; }
+
+.portfolio-about-page {
+  --about-carousel-space: 144px;
+  margin: 0;
+}
+
+.portfolio-copyright {
+  padding: 12px 12px 16px;
+  text-align: center;
+  font: 400 13px/1.3 "Portfolio Teodor", Georgia, serif;
+}
+
+.portfolio-about-page > .portfolio-blank-header { position: absolute; inset: 0 0 auto; }
+.portfolio-about-page .portfolio-about {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 66px 24px;
+  text-wrap: balance;
+}
+.portfolio-about-page .portfolio-about p:last-child { margin-bottom: 0; }
+.portfolio-about mark { color: inherit; background: transparent; }
+@media (hover: hover) {
+  .portfolio-about:hover { color: #b6b6b6; }
+  .portfolio-about:hover mark { color: #111; }
+}
+.portfolio-about-page .portfolio-about {
+  width: min(100%, 538px);
+  text-align: center;
+}
+.portfolio-about-video {
+  width: min(calc(100% - 32px), 1120px);
+  margin: 24px auto 56px;
+}
+.portfolio-about-video video {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.portfolio-contact button.has-send-pointer { cursor: none; }
+.portfolio-send-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  padding-left: 11px;
+  font: 400 13px/1.3 "Lay Grotesk Regular", sans-serif;
+  white-space: nowrap;
+}
+.portfolio-send-pointer::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 9px;
+  height: 14px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 76%, 55% 71%, 41% 100%);
+}
+
+.portfolio-about, .portfolio-about mark {
+  transition: color .38s ease;
+}
+.portfolio-app-scroll {
+  width: min(100%, 1480px);
+  margin: 0 auto;
+}
+.portfolio-app-viewport {
+  position: relative;
+  display: grid;
+  padding-block: 14px;
+  overflow: hidden;
+}
+.portfolio-app-row {
+  display: flex;
+  width: max-content;
+  position: relative;
+  gap: clamp(32px, 8vw, 122px);
+  padding-inline: clamp(24px, 5vw, 68px);
+}
+.portfolio-app-row img {
+  display: block;
+  width: clamp(82px, 16vw, 176px);
+  height: clamp(82px, 16vw, 176px);
+  object-fit: contain;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-about, .portfolio-about mark { transition: none; }
+  .portfolio-app-viewport { overflow-x: auto; }
+  .portfolio-app-row[aria-hidden] { display: none; }
+}
+
+.portfolio-app-track {
+  display: flex;
+  width: max-content;
+}
+.portfolio-app-track .portfolio-app-row {
+  flex: none;
+  gap: clamp(32px, 8vw, 122px);
+  padding-inline: 0 clamp(32px, 8vw, 122px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-app-track .portfolio-app-row { padding-inline: 20px; }
+}
+
+.portfolio-about-page .portfolio-about {
+  width: min(100%, 638px);
+  min-height: 0;
+  padding-block: clamp(76px, 13vh, 112px) 26px;
+  text-wrap: pretty;
+}
+.portfolio-app-viewport {
+  --app-window-height: clamp(142px, 26vh, 224px);
+}
+.portfolio-app-viewport::before,
+.portfolio-app-viewport::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  z-index: 1;
+  width: clamp(20px, 3.5vw, 44px);
+  pointer-events: none;
+  backdrop-filter: blur(5px) saturate(1.28);
+}
+.portfolio-app-viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, #fffb, #caedff35 54%, transparent);
+  mask-image: linear-gradient(90deg, #000, #000b 54%, transparent);
+}
+.portfolio-app-viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, #fffb, #ffdfec35 54%, transparent);
+  mask-image: linear-gradient(270deg, #000, #000b 54%, transparent);
+}
+.portfolio-app-row img {
+  width: min(clamp(82px, 16vw, 176px), calc(var(--app-window-height) - 28px));
+  height: min(clamp(82px, 16vw, 176px), calc(var(--app-window-height) - 28px));
+}
+.portfolio-contact-page {
+  grid-template-rows: 1fr auto;
+  padding-block: 56px 14px;
+}
+.portfolio-contact-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 24px 14px 0;
+  font: 400 14px/1.4 "Lay Grotesk Regular", sans-serif;
+}
+.portfolio-contact-footer a {
+  color: #111;
+  text-decoration: none;
+  transition: color .22s ease;
+}
+.portfolio-contact-footer a[href^="mailto:"] { margin-left: auto; }
+.portfolio-contact-footer a:is(:hover,:focus-visible) { color: #002fa7; }
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-app-viewport::before,
+  .portfolio-app-viewport::after { display: none; }
+  .portfolio-contact-footer a { transition: none; }
+}
+
+.portfolio-about-page .portfolio-about { padding-bottom: var(--about-carousel-space); }
+.portfolio-app-viewport::before,
+.portfolio-app-viewport::after {
+  z-index: 2;
+  width: clamp(24px, 5.4vw, 70px);
+  backdrop-filter: none;
+}
+.portfolio-app-viewport::before { background: linear-gradient(90deg, #bfdcff32, #f6efff11 60%, transparent); }
+.portfolio-app-viewport::after { background: linear-gradient(270deg, #ffe0e934, #f3e7ff11 60%, transparent); }
+.portfolio-app-lens {
+  position: absolute;
+  inset-block: 0;
+  width: clamp(24px, 5.4vw, 70px);
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.portfolio-app-lens[data-side="left"] { left: 0; }
+.portfolio-app-lens[data-side="right"] { right: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-app-lens { display: none; }
+}
+
+.portfolio-contact-page { grid-template-rows: 1fr; }
+.portfolio-contact .portfolio-contact-footer {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 22px 0 0;
+  text-align: left;
+}
+.portfolio-contact .portfolio-contact-footer a[href^="mailto:"] { margin-left: 0; }
+.portfolio-about-page .portfolio-about {
+  width: 100%;
+  padding-inline: clamp(12px, 1vw, 24px);
+  font-size: clamp(22px, 3.05vw, 42px);
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: left;
+}
+.portfolio-app-viewport::before,
+.portfolio-app-viewport::after { display: none; }
+.portfolio-app-lens { width: 8%; }
+
+.portfolio-about-page .portfolio-about-photography {
+  padding-block: clamp(120px, 20vh, 210px) 0;
+}
+
+.portfolio-about-photography p {
+  position: relative;
+  inset-block-start: 48px;
+}
+
+.portfolio-envelope {
+  --envelope-width: min(35vw, 144px, 38dvh);
+  --envelope-gap: clamp(192px, 32vh, 336px);
+  width: var(--envelope-width);
+  margin: var(--envelope-gap) auto;
+  /* The closed frame has 65 more transparent pixels above than below. */
+  margin-block-end: calc(var(--envelope-gap) + var(--envelope-width) * 65 / 320 - 12px);
+}
+
+.portfolio-envelope button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.portfolio-envelope.has-label-cursor,
+.portfolio-envelope.has-label-cursor button { cursor: none; }
+
+.portfolio-envelope-cursor {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.portfolio-envelope canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+.portfolio-contact-page .portfolio-blank-header :is(.portfolio-brand, sup) {
+  font: 400 14px/1.3 "Lay Grotesk Regular", sans-serif;
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fotografía — Paula López Román</title>
+  <script>
+    if (location.hash === '#desde-sobre') {
+      document.documentElement.classList.add('from-envelope');
+      history.replaceState(history.state, '', location.pathname + location.search);
+    }
+  </script>
+  <link rel="stylesheet" href="/portfolio/estilos.css?v=portfolio-copyright">
+  <style>
+    body { margin: 0; background: #fff; }
+    @media (prefers-reduced-motion: no-preference) {
+      .from-envelope body { animation: gallery-appear 650ms ease-out backwards; }
+      @keyframes gallery-appear { from { opacity: 0; } to { opacity: 1; } }
+    }
+    .gallery-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      mix-blend-mode: difference;
+    }
+    .gallery-header a { color: #fff; }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(6px, 1vw, 14px);
+      max-width: 1600px;
+      margin-inline: auto;
+      padding: clamp(6px, 1vw, 14px);
+    }
+    .photo-gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+      grid-column: 1 / -1;
+    }
+    .photo-gallery .gallery-portrait { grid-column: 1; }
+    .photo-gallery .gallery-portrait-right { grid-column: 2; }
+  </style>
+</head>
+<body>
+  <header class="portfolio-blank-header gallery-header">
+    <a class="portfolio-brand" href="/portfolio/#nube">Paula López Román</a>
+    <nav aria-label="Navegación principal"><a href="/portfolio/projects"><span>Proyectos</span><sup>1</sup></a><a href="/portfolio/sobre-mi"><span>Sobre mi</span><sup>2</sup></a><a href="/portfolio/hablamos"><span>Hablemos</span><sup>3</sup></a></nav>
+  </header>
+  <main class="photo-gallery" aria-label="Galería de fotografía">
+    <img src="/portfolio/media/hoja/foto-3.jpg" alt="Fotografía 3" width="1920" height="1290" decoding="async">
+    <img src="/portfolio/media/hoja/foto-5.jpg" alt="Fotografía 5" width="1920" height="1290" loading="lazy" decoding="async">
+    <img class="gallery-portrait" src="/portfolio/media/hoja/foto-21.jpg" alt="Fotografía 21" width="1290" height="1920" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-8.jpg" alt="Fotografía 8" width="1920" height="1290" loading="lazy" decoding="async">
+    <img class="gallery-portrait gallery-portrait-right" src="/portfolio/media/hoja/foto-6.jpg" alt="Fotografía 6" width="1290" height="1920" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-18.jpg" alt="Fotografía 18" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-4.jpg" alt="Fotografía 4" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-7.jpg" alt="Fotografía 7" width="1920" height="1290" loading="lazy" decoding="async">
+    <img class="gallery-portrait gallery-portrait-right" src="/portfolio/media/hoja/foto-2.jpg" alt="Fotografía 2" width="1290" height="1920" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-9.jpg" alt="Fotografía 9" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-12.jpg" alt="Fotografía 12" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-14.jpg" alt="Fotografía 14" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-13.jpg" alt="Fotografía 13" width="1920" height="1290" loading="lazy" decoding="async">
+    <img class="gallery-portrait gallery-portrait-right" src="/portfolio/media/hoja/foto-16-vertical.jpg" alt="Fotografía 16" width="1290" height="1920" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-17.jpg" alt="Fotografía 17" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-19.jpg" alt="Fotografía 19" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-20.jpg" alt="Fotografía 20" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-22.jpg" alt="Fotografía 22" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-24.jpg" alt="Fotografía 24" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-23.jpg" alt="Fotografía 23" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-10.jpg" alt="Fotografía 10" width="1920" height="1290" loading="lazy" decoding="async">
+    <img src="/portfolio/media/hoja/foto-15.jpg" alt="Fotografía 15" width="1920" height="1290" loading="lazy" decoding="async">
+    <img class="gallery-portrait" src="/portfolio/media/hoja/foto-11-vertical.jpg" alt="Fotografía 11" width="1290" height="1920" loading="lazy" decoding="async">
+  </main>
+  <footer class="portfolio-copyright">Paula López Román ©2026</footer>
+  <script src="/portfolio/hoja/return-to-envelope.js" defer></script>
+</body>
+</html>

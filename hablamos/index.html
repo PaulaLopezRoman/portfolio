@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Hablamos? — Paula López Román</title>
+  <link rel="stylesheet" href="/portfolio/estilos.css?v=contact-nav-type">
+</head>
+<body class="portfolio-contact-page">
+  <header class="portfolio-blank-header">
+    <a class="portfolio-brand" href="/portfolio/#nube">Paula López Román</a>
+    <nav aria-label="Navegación principal"><a href="/portfolio/projects"><span>Proyectos</span><sup>1</sup></a><a href="/portfolio/sobre-mi"><span>Sobre mi</span><sup>2</sup></a><a href="/portfolio/hablamos" aria-current="page"><span>Hablemos</span><sup>3</sup></a></nav>
+  </header>
+  <main class="portfolio-contact">
+  <h1>Hablemos</h1>
+  <p>Si tienes un proyecto en mente, cuéntame qué estás pensando.</p>
+  <form id="contact-form" action="/api/contacto" method="post">
+    <label>Nombre <input name="name" autocomplete="name" maxlength="150" required></label>
+    <label>Correo electrónico <input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+    <label class="contact-message">Cuéntame sobre tu proyecto <textarea name="message" rows="4" maxlength="5000" required></textarea></label>
+    <button type="submit" aria-label="Enviar"><svg aria-hidden="true" width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M1 8h18m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1"/></svg></button>
+  </form>
+  <p id="contact-status" role="status" hidden></p>
+<footer class="portfolio-contact-footer" aria-label="Datos de contacto"><a href="tel:+34626350245">+34 626350245</a><a href="mailto:paumi1043@gmail.com">paumi1043@gmail.com</a></footer>
+</main>
+
+<script>
+const contactForm = document.getElementById('contact-form');
+const contactStatus = document.getElementById('contact-status');
+contactForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  const submit = contactForm.querySelector('button');
+  if (submit.disabled) return;
+  const data = Object.fromEntries(new FormData(contactForm));
+  submit.disabled = true;
+  contactStatus.hidden = false;
+  contactStatus.textContent = 'Enviando…';
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    contactStatus.textContent = result.message;
+    if (response.ok) contactForm.reset();
+  } catch {
+    contactStatus.textContent = 'No se pudo conectar con el servidor. Inténtalo de nuevo.';
+  } finally {
+    submit.disabled = false;
+  }
+});
+</script>
+<span class="portfolio-send-pointer" aria-hidden="true" hidden>Enviar</span>
+<script>
+ const button=document.querySelector('#contact-form button');
+ const pointerLabel=document.querySelector('.portfolio-send-pointer');
+ button.addEventListener('pointermove',event=>{
+   if(event.pointerType==='touch')return;
+   pointerLabel.style.transform='translate('+event.clientX+'px,'+event.clientY+'px)';
+   pointerLabel.hidden=false;
+   button.classList.add('has-send-pointer');
+ });
+ function resetPointer(){
+   pointerLabel.hidden=true;
+   button.classList.remove('has-send-pointer');
+ }
+ button.addEventListener('pointerleave',resetPointer);
+ window.addEventListener('blur',resetPointer);
+</script>
+</body>
+</html>
