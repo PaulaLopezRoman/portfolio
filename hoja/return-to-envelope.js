@@ -19,7 +19,7 @@ window.addEventListener('scroll', async () => {
     }).finished;
   }
 
-  window.location.assign('/sobre-mi#sobre');
+  window.location.assign('/portfolio/sobre-mi/#sobre');
 }, { passive: true });
 
 window.addEventListener('pageshow', event => {

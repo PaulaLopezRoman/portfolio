@@ -174,7 +174,7 @@ envelopeVideo.addEventListener('ended', async () => {
       fill: 'forwards'
     }).finished;
   }
-  window.location.assign('/hoja/#desde-sobre');
+  window.location.assign('/portfolio/hoja/#desde-sobre');
 });
 
 function resetClosedEnvelope() {
