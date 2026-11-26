@@ -10,6 +10,7 @@ let manualOffset = 0;
 let position = 0;
 let frame = 0;
 let previousTime = 0;
+let drag = null;
 
 track.className = 'portfolio-app-track';
 row.replaceWith(track);
@@ -104,7 +105,8 @@ function render(time) {
   const elapsed = previousTime ? Math.min(50, time - previousTime) : 16;
   previousTime = time;
   const target = scrollOffset + manualOffset;
-  position += (target - position) * (1 - Math.exp(-elapsed / 95));
+  if (drag && drag.axis === 'x') position = target;
+  else position += (target - position) * (1 - Math.exp(-elapsed / 95));
   const done = Math.abs(target - position) < .15;
   if (done) position = target;
   const loopPosition = ((position % cycle) + cycle) % cycle;
@@ -150,6 +152,47 @@ viewport.addEventListener('wheel', event => {
   manualOffset += (event.deltaX || event.deltaY) * (event.deltaMode === 1 ? 16 : 1);
   schedule();
 }, {passive:false});
+// Arrastrar con el dedo (o con el ratón) para pasar el carrusel de lado a lado.
+viewport.addEventListener('pointerdown', event => {
+  if (motion.matches || (event.pointerType === 'mouse' && event.button !== 0)) return;
+  drag = {x:event.clientX, y:event.clientY, id:event.pointerId, axis:null,
+    start:manualOffset, lastX:event.clientX, lastTime:performance.now(), velocity:0};
+});
+viewport.addEventListener('pointermove', event => {
+  if (!drag || event.pointerId !== drag.id) return;
+  const dx = event.clientX - drag.x;
+  const dy = event.clientY - drag.y;
+  if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) {
+    drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    if (drag.axis === 'x') {
+      viewport.classList.add('is-dragging');
+      try { viewport.setPointerCapture(drag.id); } catch {}
+    }
+  }
+  if (drag.axis !== 'x') return;
+  event.preventDefault();
+  const now = performance.now();
+  drag.velocity = (event.clientX - drag.lastX) / Math.max(1, now - drag.lastTime);
+  drag.lastX = event.clientX;
+  drag.lastTime = now;
+  manualOffset = drag.start - dx;
+  schedule();
+});
+const endDrag = event => {
+  if (!drag || event.pointerId !== drag.id) return;
+  if (drag.axis === 'x') {
+    manualOffset -= drag.velocity * 220;
+    viewport.classList.remove('is-dragging');
+  }
+  drag = null;
+  schedule();
+};
+viewport.addEventListener('pointerup', endDrag);
+viewport.addEventListener('pointercancel', endDrag);
+viewport.addEventListener('click', event => {
+  if (viewport.classList.contains('was-dragged')) event.preventDefault();
+}, true);
+viewport.addEventListener('dragstart', event => event.preventDefault());
 viewport.addEventListener('keydown', event => {
   if (motion.matches || !['ArrowLeft','ArrowRight'].includes(event.key)) return;
   event.preventDefault();

@@ -117,6 +117,24 @@ function scheduleEnvelopeFrame() {
 envelopeVideo.addEventListener('loadeddata', drawEnvelope);
 envelopeVideo.addEventListener('seeked', drawEnvelope);
 
+// En el iPhone el vídeo no carga hasta que tocas la pantalla, así que el sobre
+// cerrado se pinta desde una imagen fija para que se vea desde el principio.
+const closedPoster = new Image();
+closedPoster.src = '/portfolio/media/sobre-kraft-cerrado.png';
+function drawClosedPoster() {
+  if (!closedPoster.complete || !closedPoster.naturalWidth) return;
+  if (openingStarted || revealStarted || closingEnvelope) return;
+  envelopeContext.clearRect(0, 0, frameWidth, frameHeight);
+  envelopeContext.drawImage(closedPoster, 0, 0, frameWidth, frameHeight);
+}
+closedPoster.addEventListener('load', () => {
+  if (envelopeVideo.readyState < 2) drawClosedPoster();
+});
+if (closedPoster.complete) drawClosedPoster();
+window.addEventListener('pageshow', () => {
+  if (envelopeVideo.readyState < 2) drawClosedPoster();
+});
+
 async function openEnvelope() {
   if (openingStarted || revealStarted || closingEnvelope) return;
   openingStarted = true;
@@ -181,6 +199,7 @@ function resetClosedEnvelope() {
   closingEnvelope = false;
   envelopeVideo.src = openingSource;
   envelopeButton.disabled = false;
+  drawClosedPoster();
 }
 
 async function returnToClosedEnvelope() {
