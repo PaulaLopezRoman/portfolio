@@ -406,6 +406,10 @@ nav[data-navbar] a { color: inherit; }
   .portfolio-about:hover { color: #b6b6b6; }
   .portfolio-about:hover mark { color: #111; }
 }
+@media (hover: none) {
+  .portfolio-about.is-focused { color: #b6b6b6; }
+  .portfolio-about.is-focused mark { color: #111; }
+}
 .portfolio-about-page .portfolio-about {
   width: min(100%, 538px);
   text-align: center;
